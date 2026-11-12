@@ -1,0 +1,23 @@
+name: Build Menu Makanan EXE
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout kode
+        uses: actions/checkout@v4
+
+      - name: Compile C++ menjadi EXE
+        run: g++ -static "menu_makanan.cpp" -o "menu_makanan.exe"
+
+      - name: Upload file EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: hasil-menu-makanan
+          path: "menu_makanan.exe"
